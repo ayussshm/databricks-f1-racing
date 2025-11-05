@@ -5,8 +5,14 @@
 		"factoryName": {
 			"value": "f1-databricks-adf"
 		},
+		"ls_formula1dl_storage_accountKey": {
+			"value": ""
+		},
 		"databricks_f1_racing_properties_typeProperties_existingClusterId": {
 			"value": "0922-174253-rrhxqx9e"
+		},
+		"ls_formula1dl_storage_properties_typeProperties_url": {
+			"value": "https://formula1dl244.dfs.core.windows.net/"
 		}
 	}
 }
