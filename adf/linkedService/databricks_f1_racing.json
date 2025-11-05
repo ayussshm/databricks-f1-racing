@@ -1,0 +1,13 @@
+{
+	"name": "databricks_f1_racing",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-2949180425135965.5.azuredatabricks.net",
+			"authentication": "MSI",
+			"workspaceResourceId": "/subscriptions/d10f4b71-4575-430e-b8f4-dd3fa88ab077/resourceGroups/F1-Racing-Databricks-RG/providers/Microsoft.Databricks/workspaces/F1-Racing-Databricks-WS",
+			"existingClusterId": "0922-174253-rrhxqx9e"
+		}
+	}
+}
