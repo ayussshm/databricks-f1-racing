@@ -1,10 +1,294 @@
 {
-	"name": "pipeline1",
+	"name": "pl_ingest_formula1_uc",
 	"properties": {
 		"activities": [
 			{
-				"name": "Create Bronze Tables",
-				"type": "DatabricksNotebook",
+				"name": "If Folder Exists",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Get Folder Details",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@activity('Get Folder Details').output.exists",
+						"type": "Expression"
+					},
+					"ifTrueActivities": [
+						{
+							"name": "Create Bronze Tables",
+							"type": "DatabricksNotebook",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"notebookPath": "/Formula1/databricks-f1-racing/raw/1. create_bronze_tables",
+								"baseParameters": {
+									"p_file_date": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "databricks_f1_racing_uc",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "Ingest Circuits File",
+							"type": "DatabricksNotebook",
+							"dependsOn": [
+								{
+									"activity": "Create Bronze Tables",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"notebookPath": "/Formula1/databricks-f1-racing/ingestion/1. ingest_circuits_file",
+								"baseParameters": {
+									"p_file_date": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "databricks_f1_racing_uc",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "Ingest Races File",
+							"type": "DatabricksNotebook",
+							"dependsOn": [
+								{
+									"activity": "Create Bronze Tables",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"notebookPath": "/Formula1/databricks-f1-racing/ingestion/2. ingest_races_file",
+								"baseParameters": {
+									"p_file_date": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "databricks_f1_racing_uc",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "Ingest Constructors File",
+							"type": "DatabricksNotebook",
+							"dependsOn": [
+								{
+									"activity": "Create Bronze Tables",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"notebookPath": "/Formula1/databricks-f1-racing/ingestion/3. ingest_constructors_file",
+								"baseParameters": {
+									"p_file_date": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "databricks_f1_racing_uc",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "Ingest Drivers File",
+							"type": "DatabricksNotebook",
+							"dependsOn": [
+								{
+									"activity": "Create Bronze Tables",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"notebookPath": "/Formula1/databricks-f1-racing/ingestion/4. ingest_drivers_file",
+								"baseParameters": {
+									"p_file_date": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "databricks_f1_racing_uc",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "Ingest Results File",
+							"type": "DatabricksNotebook",
+							"dependsOn": [
+								{
+									"activity": "Create Bronze Tables",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"notebookPath": "/Formula1/databricks-f1-racing/ingestion/5. ingest_results_file",
+								"baseParameters": {
+									"p_file_date": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "databricks_f1_racing_uc",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "Ingest Pitstops File",
+							"type": "DatabricksNotebook",
+							"dependsOn": [
+								{
+									"activity": "Create Bronze Tables",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"notebookPath": "/Formula1/databricks-f1-racing/ingestion/6. ingest_pitstops_file",
+								"baseParameters": {
+									"p_file_date": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "databricks_f1_racing_uc",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "Ingest Lap Times Files",
+							"type": "DatabricksNotebook",
+							"dependsOn": [
+								{
+									"activity": "Create Bronze Tables",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"notebookPath": "/Formula1/databricks-f1-racing/ingestion/7. ingest_lap_times_file",
+								"baseParameters": {
+									"p_file_date": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "databricks_f1_racing_uc",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "Ingest Qualifying File",
+							"type": "DatabricksNotebook",
+							"dependsOn": [
+								{
+									"activity": "Create Bronze Tables",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"notebookPath": "/Formula1/databricks-f1-racing/ingestion/8. ingest_qualifying_file",
+								"baseParameters": {
+									"p_file_date": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "databricks_f1_racing_uc",
+								"type": "LinkedServiceReference"
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "Get Folder Details",
+				"type": "GetMetadata",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -15,14 +299,27 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Formula1/databricks-f1-racing/raw/1. create_bronze_tables",
-					"baseParameters": {
-						"p_file_date": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')"
+					"dataset": {
+						"referenceName": "ds_formula1_raw",
+						"type": "DatasetReference",
+						"parameters": {
+							"p_window_end_date": {
+								"value": "@pipeline().parameters.p_window_end_date",
+								"type": "Expression"
+							}
+						}
+					},
+					"fieldList": [
+						"exists"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "JsonReadSettings"
 					}
-				},
-				"linkedServiceName": {
-					"referenceName": "databricks_f1_racing_uc",
-					"type": "LinkedServiceReference"
 				}
 			}
 		],
