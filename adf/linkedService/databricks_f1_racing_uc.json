@@ -1,0 +1,20 @@
+{
+	"name": "databricks_f1_racing_uc",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-2949180425135965.5.azuredatabricks.net",
+			"authentication": "MSI",
+			"workspaceResourceId": "/subscriptions/d10f4b71-4575-430e-b8f4-dd3fa88ab077/resourceGroups/F1-Racing-Databricks-RG/providers/Microsoft.Databricks/workspaces/F1-Racing-Databricks-WS",
+			"newClusterNodeType": "Standard_DS3_v2",
+			"newClusterNumOfWorker": "1",
+			"newClusterSparkEnvVars": {
+				"PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+			},
+			"newClusterVersion": "16.4.x-scala2.12",
+			"clusterOption": "Fixed",
+			"newClusterInitScripts": []
+		}
+	}
+}
