@@ -13,7 +13,11 @@
 		},
 		"databricks_f1_racing_properties_typeProperties_existingClusterId": {
 			"type": "string",
-			"defaultValue": "0922-174253-rrhxqx9e"
+			"defaultValue": "1106-183639-p9kb9g2q"
+		},
+		"databricks_f1_racing_uc_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "1106-183639-p9kb9g2q"
 		},
 		"ls_formula1dl_storage_properties_typeProperties_url": {
 			"type": "string",
@@ -55,6 +59,9 @@
 					},
 					"databricks_f1_racing_properties_typeProperties_existingClusterId": {
 						"value": "[parameters('databricks_f1_racing_properties_typeProperties_existingClusterId')]"
+					},
+					"databricks_f1_racing_uc_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('databricks_f1_racing_uc_properties_typeProperties_existingClusterId')]"
 					},
 					"ls_formula1dl_storage_properties_typeProperties_url": {
 						"value": "[parameters('ls_formula1dl_storage_properties_typeProperties_url')]"
