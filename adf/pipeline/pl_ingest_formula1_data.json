@@ -89,7 +89,7 @@
 								}
 							},
 							"linkedServiceName": {
-								"referenceName": "databricks_f1_racing",
+								"referenceName": "databricks_f1_racing_uc",
 								"type": "LinkedServiceReference"
 							}
 						},
@@ -126,7 +126,7 @@
 								}
 							},
 							"linkedServiceName": {
-								"referenceName": "databricks_f1_racing",
+								"referenceName": "databricks_f1_racing_uc",
 								"type": "LinkedServiceReference"
 							}
 						},
@@ -163,7 +163,7 @@
 								}
 							},
 							"linkedServiceName": {
-								"referenceName": "databricks_f1_racing",
+								"referenceName": "databricks_f1_racing_uc",
 								"type": "LinkedServiceReference"
 							}
 						},
@@ -200,7 +200,7 @@
 								}
 							},
 							"linkedServiceName": {
-								"referenceName": "databricks_f1_racing",
+								"referenceName": "databricks_f1_racing_uc",
 								"type": "LinkedServiceReference"
 							}
 						},
@@ -237,7 +237,7 @@
 								}
 							},
 							"linkedServiceName": {
-								"referenceName": "databricks_f1_racing",
+								"referenceName": "databricks_f1_racing_uc",
 								"type": "LinkedServiceReference"
 							}
 						},
@@ -274,7 +274,7 @@
 								}
 							},
 							"linkedServiceName": {
-								"referenceName": "databricks_f1_racing",
+								"referenceName": "databricks_f1_racing_uc",
 								"type": "LinkedServiceReference"
 							}
 						},
@@ -311,7 +311,7 @@
 								}
 							},
 							"linkedServiceName": {
-								"referenceName": "databricks_f1_racing",
+								"referenceName": "databricks_f1_racing_uc",
 								"type": "LinkedServiceReference"
 							}
 						},
@@ -348,7 +348,7 @@
 								}
 							},
 							"linkedServiceName": {
-								"referenceName": "databricks_f1_racing",
+								"referenceName": "databricks_f1_racing_uc",
 								"type": "LinkedServiceReference"
 							}
 						},
@@ -374,7 +374,7 @@
 								}
 							},
 							"linkedServiceName": {
-								"referenceName": "databricks_f1_racing",
+								"referenceName": "databricks_f1_racing_uc",
 								"type": "LinkedServiceReference"
 							}
 						}
