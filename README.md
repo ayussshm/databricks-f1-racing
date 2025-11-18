@@ -24,14 +24,13 @@ Services Used
 ## 📁 Repository Structure
 
 ```text
-├── set-up/                                    # Mounting ADLS container (deprecated)
-│   ├── 9. mount_adls_containers_for_project
+├── set-up/                                    # Setting up Unity Catalog
+│   ├── 10. Created External Location, Catalog and Schemas required for project
 │  
 ├── raw/                                       # Bronze layer table creation
-│   ├── 1. create_raw_tables                
+│   ├── 1. create_bronze_tables                
 │
-├── ingestion/                                 # Silver layer table creation
-│   ├── 01. create processed Database       
+├── ingestion/                                 # Silver layer table creation      
 │   ├── 1. ingestion_circuits_file
 │   ├── 2. ingestion_races_file
 │   ├── 3. ingestion_constructors_file
@@ -42,7 +41,6 @@ Services Used
 │   ├── 8. ingestion_qualifying_file
 |
 ├── trans/                                     # Gold layer table creation
-│   ├── 0. Create Presentation Database
 │   ├── 1. race_results    
 │   ├── 2. driver_standings
 │   ├── 3. constructor_standings
@@ -72,15 +70,54 @@ Services Used
 ├── .gitignore
 └── README.md
 ```
+
+## 🔄 Pipeline Overview
+### Bronze Layer
+- Stores raw data as external tables directly on ADLS
+- Schemas defined manually for reliability
+- Mirrors source structure closely
+
+### Silver Layer
+- Converts column names to snake_case
+- Removes duplicates and invalid records
+- Flattens nested structures
+- Adds metadata (data_source, file_date, ingestion_date)
+
+### Gold Layer
+Curated tables for analytics, including:
+- Race Results
+- Driver Standings
+- Constructor Standings
+- Calculated Race Results
+  
+## ⚡ Incremental Load Logic
+To avoid reprocessing full datasets weekly, the pipeline uses **Delta Lake MERGE** operations:
+- Tables partitioned by `race_id`
+- `MERGE` matches on both `race_id` + primary key
+- `WHEN MATCHED` → update
+- `WHEN NOT MATCHED` → insert
+
+This ensures idempotent, efficient, and scalable incremental updates.
+
 ## ▶️ How to Run
 
 1. Clone this repository
-2. Create git folder in Databricks workspace and provide cloned repository url
-3. Create metastore with extenal location for Catalog
-4. Configure your ADLS Gen2 paths
-5. Run the Bronze ingestion notebooks
-6. Run Silver transformations
-7. Run Gold model notebooks
+2. Create git folder in Databricks workspace and provide the cloned repository url
+3. Create ADLS with containers
+4. Create Storage Credentials for ADLS
+5. Configure your ADLS Gen2 paths in set-up file
+6. Run the Bronze ingestion notebooks
+7. Run Silver transformations
+8. Run Gold model notebooks
+
+## 🌟 Key Features
+
+- Medallion Architecture (Bronze → Silver → Gold)
+- Delta Lake with full ACID capabilities
+- Incremental processing via MERGE
+- Full data lineage using Unity Catalog
+- Automated weekly orchestration with ADF
+- Reproducible transformations with Delta Time Travel
 
 ## 📬 Contact
 For any questions or feedback, reach out to me on:
