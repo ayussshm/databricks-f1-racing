@@ -60,10 +60,7 @@ Services Used
 │   └── dataset/
 │   └── linkedService/
 │   └── pipeline/
-│   └── trigger/
-│
-├── utils/
-│   └── 1. prepare_for_incremental_load       
+│   └── trigger/   
 │
 ├── databricks-f1-racing.dbc                  # DBC File for Project
 ├── databricks_f1_architecture.jpg            # Architecture digram for project
