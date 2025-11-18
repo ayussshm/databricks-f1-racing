@@ -1,7 +1,7 @@
 # 🏎️ databricks-f1-racing
 This repository contains Databricks workspace for a personal project: Formula1 Racing Databricks Project. This project focuses on building end-to-end analytics pipeline on F1 racing data using Databricks and Azure Cloud. Data is ingested from Ergast API, and processed through Medallion Architecture (Bronze -> Silver -> Gold) to build curated models for visualization and insights in Power BI.
 
-For a detailed overview of the project, please visit [this](https://wwww.ayush-m.com/projects/f1-racing-databricks-project.html) link.
+For a detailed overview of the project, please visit [this](https://www.ayush-m.com/projects/f1-racing-databricks-project.html) link.
 
 ---
 ## 📐 Architecture Overview
